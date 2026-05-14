@@ -1,30 +1,35 @@
-## Creación del entorno virtual para ejecución
+# DentalCare - Clinic Management ERP
 
-1. Tener una carpeta propia del proyecto
-2. Ejecutar el comando
-```python3.13 -m venv venv```
+Sistema integral de planificación de recursos empresariales (ERP) desarrollado en Python para la administración de clínicas odontológicas. La aplicación de escritorio proporciona herramientas centralizadas para la gestión de pacientes, control de expedientes médicos, programación de citas y control de accesos basado en roles.
 
-## Para poder instalar librerías del proyecto
-Las librerías ya instaladas serán visibles en el archivo *requirements.txt*. Si necesitas instalar otra librería:
+## Módulos y Características
 
-1. Activar el entorno virtual con:
-   ```source venv/bin/activate```
-3. Instalar las librerías necesarias
-4. Guardar las nuevas librerías en el *txt* con:
-   ```pip freeze > requirements.txt```
+El sistema está construido bajo una arquitectura modular, dividiendo las responsabilidades del negocio en componentes aislados:
 
-Si necesitan crear más carpetas, hacerlo sin problema.
+* **Gestión de Identidad y Accesos (IAM):** Autenticación segura y menús dinámicos dependientes del rol del usuario (Administrador vs. Dentista) (`MenuPrincipal.py`, `MenuPrincipalDentista.py`).
+* **Control de Expedientes Médicos (EHR):** Operaciones CRUD completas para la creación y actualización del historial clínico de los pacientes (`CrudExpediente.py`).
+* **Motor de Agendamiento:** Interfaz gráfica dedicada para la programación, consulta y administración de citas médicas (`CitasWindow.py`).
+* **Administración de Personal y Usuarios:** Módulos de control interno para el registro y gestión de especialistas y personal administrativo (`CrudDentista.py`, `CrudUser.py`).
 
-Cada persona ya tiene su rama creada, favor de verificar que cada persona esté trabajando en su rama. Si hay 2 personas trabajando en la misma rama, al hacer *commit* el proyecto puede **explotar**. 
+## Stack Tecnológico
 
-**Verificar que el commit se haga en su rama**
+* **Lenguaje:** Python 3.x
+* **Interfaz Gráfica (GUI):** Integración de archivos `.ui` (diseñados visualmente) acoplados a controladores lógicos en Python.
+* **Base de Datos:** Motor SQL relacional con esquemas estructurados para mantener la integridad referencial de la clínica.
 
-Miembro 1: Login y gestión de usuarios (CRUD).
+## 📦 Instalación y Configuración del Entorno
 
-Miembro 2: Gestión de dentistas (CRUD).
-
-Miembro 3: Gestión de pacientes y citas.
-
-Miembro 4: Elaboración y actualización de expedientes.
-
-Miembro 5: Integración, menú principal y validaciones generales.
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/AxelLaraG/dental-clinic-erp.git
+   cd dental-clinic-erp
+   ```
+2. Despliegue de Base de Datos:
+   Antes de ejecutar la aplicación, inicializa la base de datos ejecutando los scripts SQL ubicados en DentalCare/Clinica_DataBase/ y DentalCare/Expedientes/ en tu motor de base de datos local. Asegúrate de configurar las credenciales de conexión en tu entorno.
+3. Ejecución:
+   El punto de entrada principal del sistema inicia el proceso de autenticación. Ejecuta:
+      ```
+      python DentalCare/Login/LoginWindow.py
+      ```
+## Arquitectura de la Interfaz
+El proyecto sigue un patrón de separación entre el diseño visual y la lógica de negocio. Las interfaces fueron diseñadas visualmente y se almacenan como archivos `.ui` (XML nativo) en sus respectivos directorios modulares. Los scripts de Python asociados cargan estas vistas y manejan los eventos, señales y transacciones hacia la base de datos de manera limpia.
